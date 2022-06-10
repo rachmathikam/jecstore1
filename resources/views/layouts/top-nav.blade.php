@@ -6,7 +6,7 @@
         <span class="d-none d-lg-block">{{ config('app.name', 'JEC STORE') }}</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+    </div><!-- End Logo ss -->
 
     <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
