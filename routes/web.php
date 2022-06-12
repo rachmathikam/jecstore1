@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::middleware(['auth'])->group(function () {
+//      Route::middleware(['user'])->group(function () {
+//         Route::get('user', [UserController::class, 'index'])->name('user');
+//         //Route::get('user/profile', [UserController::class, 'profile']);
+//     });
+
+//     Route::get('/logout', function() {
+//         Auth::logout();
+//         return redirect('/');
+//     });
+// });
+
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home',                 [HomeController::class, 'index'])->name('home');
+Route::resource('users',            UserController::class);
+Route::resource('roles',            RoleController::class);           
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

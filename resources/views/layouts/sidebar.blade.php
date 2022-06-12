@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{{route('home')}}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -16,12 +16,14 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+          @can('user-list')
+            <a href="{{route('users.index')}}">
               <i class="bi bi-circle"></i><span>User</span>
             </a>
+            @endcan
           </li>
           <li>
-            <a href="components-accordion.html">
+          <a href="{{route('roles.index')}}">
               <i class="bi bi-circle"></i><span>Role</span>
             </a>
           </li>
@@ -92,3 +94,4 @@
     </ul>
 
   </aside><!-- End Sidebar-->
+  
