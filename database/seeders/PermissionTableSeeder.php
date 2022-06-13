@@ -27,6 +27,9 @@ class PermissionTableSeeder extends Seeder
             'permission-create',
             'permission-edit',
             'permission-delete',
+            'contact-list',
+            'menu-data-list',
+            'list-pelanggan',
         ];
 
         foreach ($permissions as $permission) {

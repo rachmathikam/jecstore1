@@ -16,11 +16,11 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-          @can('user-list')
+          <!-- @can('user-list') -->
             <a href="{{route('users.index')}}">
               <i class="bi bi-circle"></i><span>User</span>
             </a>
-            @endcan
+          <!-- @endcan -->
           </li>
           <li>
           <a href="{{route('roles.index')}}">
@@ -35,16 +35,18 @@
         </ul>
       </li>
       <!-- End Components Nav  -->
-
+      @if(auth()->user()->can('menu-list'))
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Data</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+          @if(auth()->user()->can('list-pelanggan'))
             <a href="forms-elements.html">
               <i class="bi bi-circle"></i><span>Data Pelanggan</span>
             </a>
+          @endif
           </li>
           <li>
             <a href="forms-layouts.html">
@@ -63,7 +65,7 @@
           </li>
         </ul>
       </li><!-- End Forms Nav -->
-
+      @endif
  
 
       <li class="nav-item">
