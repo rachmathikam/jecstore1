@@ -9,18 +9,17 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
+      @if(auth()->user()->can('master-permission-list')) 
        <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-          <!-- @can('user-list') -->
             <a href="{{route('users.index')}}">
               <i class="bi bi-circle"></i><span>User</span>
             </a>
-          <!-- @endcan -->
+           
           </li>
           <li>
           <a href="{{route('roles.index')}}">
@@ -34,8 +33,9 @@
           
         </ul>
       </li>
+      @endif
       <!-- End Components Nav  -->
-      @if(auth()->user()->can('menu-list'))
+      @if(auth()->user()->can('menu-data-list'))
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Data</span><i class="bi bi-chevron-down ms-auto"></i>

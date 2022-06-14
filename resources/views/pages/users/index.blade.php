@@ -15,7 +15,7 @@
     </ol>
   </nav>
 </div><!-- End Page Title -->
-
+ 
 <section class="section">
   <div class="row">
     <div class="col-lg-12">
@@ -23,7 +23,9 @@
         <div class="card-body">
             <div class="table-responsive">
                 <h5 class="card-title">Datatables</h5>
-                <button type="button" class="btn btn-success">Tambah<i class="bi bi-plus"></i></button>
+                @can('user-create')
+                <a href="{{ route('users.create')}}"><button type="button" class="btn btn-success">Tambah<i class="bi bi-plus"></i></button></a>
+                @endcan
                 <table class="table datatable" style="width: 100%; white-space: nowrap">
                     <thead>
                         <tr>
