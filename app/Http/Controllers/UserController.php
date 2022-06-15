@@ -43,9 +43,13 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'password' => 'required|confirmed',
+            // 'roles' => 'required'
         ]);
+
+        
+
+   
     
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
@@ -53,7 +57,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return back()->with('success', 'User berhasil ditambahkan');
+        return redirect()->route('users.index')->with('success','User created successfully');
     }
 
     /**
@@ -64,7 +68,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-       
+        $data = User::findOrFail($id);
+        $roles = Role::all();
+        $userRole = $data->roles->first();
+        return view('pages.users.show', compact('data','roles','userRole'));
+        return view('pages.users.show');
     }
 
     /**

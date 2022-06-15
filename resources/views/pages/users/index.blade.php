@@ -9,9 +9,8 @@
   <h1>Data Tables</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item">Tables</li>
-      <li class="breadcrumb-item active">Data</li>
+      <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
+      <li class="breadcrumb-item active">User</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -39,13 +38,14 @@
                     <tbody>
                         @foreach($user as $users)
                         <tr>
-                            <th scope="row">1</th>
+                        
+                            <th scope="row">{{$loop->iteration}}</th>
                             <td>{{ $users->name }}</td>
                             <td>{{ $users->email }}</td>
                             <td>Admin</td>
                             <td>
                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $users->id) }}" method="POST">
-                            <button type="button" class="btn btn-primary"><i class="bi bi-info-circle"></i></button> 
+                            <a href="{{ route('users.show', $users->id) }}"><button type="button" class="btn btn-primary"><i class="bi bi-info-circle"></i></button></a> 
                             <a href="{{ route('users.edit', $users->id) }}"><button type="button" class="btn btn-warning"><i class="bi bi-pencil"></i></button></a>
                           
                                             @csrf
