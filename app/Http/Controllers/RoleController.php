@@ -42,8 +42,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission = Permission::get();
-        return view('roles.create',compact('permission'));
+        $permissions = Permission::get();
+        return view('pages.roles.create',compact('permissions'));
     }
 
     /**
@@ -58,7 +58,11 @@ class RoleController extends Controller
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
         ]);
-    
+        // dd($request->all());
+        foreach ($request->permission as $permission) {
+            $data[] = $permission;
+        }
+
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
     
@@ -80,7 +84,7 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id",$id)
             ->get();
     
-        return view('roles.show',compact('role','rolePermissions'));
+        return view('pages.roles.show',compact('role','rolePermissions'));
     }
 
     /**
@@ -92,12 +96,12 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        $permission = Permission::get();
+        $permissions = Permission::get();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
     
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        return view('pages.roles.edit',compact('role','permissions','rolePermissions'));
     }
 
     /**
@@ -109,11 +113,12 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
+            // 'permission' => 'required',
         ]);
-    
+        // dd($request->all()); 
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();

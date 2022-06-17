@@ -10,7 +10,7 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
-      <li class="breadcrumb-item active">User</li>
+      <li class="breadcrumb-item active">Roles</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -36,20 +36,19 @@
                     <tbody>
                         @foreach($roles as $role)
                         <tr>
-                        
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{ $role->name }}</td>
                             <td>
                             @can('role-edit')
                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('roles.destroy', $role->id) }}" method="POST">
-                            <a href="{{ route('roles.show', $role->id) }}"><button type="button" class="btn btn-primary"><i class="bi bi-info-circle"></i></button></a> 
+                            <!-- <a href="{{ route('roles.show', $role->id) }}"><button type="button" class="btn btn-primary"><i class="bi bi-info-circle"></i></button></a>  -->
                             <a href="{{ route('roles.edit', $role->id) }}"><button type="button" class="btn btn-warning"><i class="bi bi-pencil"></i></button></a>
                           
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                                            <!--  -->
-                                        </form>
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                  <!--  -->
+                              </form>
                     
                            @endcan
                             

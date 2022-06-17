@@ -65,9 +65,10 @@
   <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
   <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script>
+  @yield('javascript')
 
 </body>
 
