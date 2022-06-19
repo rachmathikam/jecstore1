@@ -29,7 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.users.create');
+        
+        $roles  = Role::all();
+        return view('pages.users.create', compact('roles'));
     }
 
     /**
@@ -40,25 +42,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
-            // 'roles' => 'required'
-        ]);
-
+        $data = $request->all();
         
-
-   
-    
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-    
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-
-        return redirect()->route('users.index')->with('success','User created successfully');
+        $request->validate([
+            'username'  => 'required|string|max:255|unique:users',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'password'  => 'required|string|min:3|confirmed',
+            'roles'      => 'required|not_in:0',
+        ]);
+        
+        $data['password'] = Hash::make($request->password);
+        $user = User::create($data);
+        $user->assignRole($request->role);
+        if ($user) {
+            return redirect()->route('users.index')->with('success', 'Created User Successfully.');
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -72,7 +72,7 @@ class UserController extends Controller
         $roles = Role::all();
         $userRole = $data->roles->first();
         return view('pages.users.show', compact('data','roles','userRole'));
-        return view('pages.users.show');
+       
     }
 
     /**
@@ -112,7 +112,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'confirmed',
-            // 'roles' => 'required'
+            'roles' => 'required'
         ]);
     
         $input = $request->all();
@@ -121,13 +121,13 @@ class UserController extends Controller
         }else{
             $input = Arr::except($input,array('password'));    
         }
-    
+        // $user->syncRole($request->input('role'));
         $user = User::findOrFail($id);
         $user->update($input);
         
         // DB::table('model_has_roles')->where('model_id',$id)->delete();
     
-        // $user->assignRole($request->input('roles'));
+        $user->assignRole($request->input('roles'));
         
         return redirect()->route('users.index')->with('success','User updated successfully');
     }

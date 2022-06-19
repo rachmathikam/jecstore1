@@ -66,10 +66,13 @@
                     @enderror
             </div>
             <div class="col-md-12">
-              <label for="inputState" class="form-label">Role</label>
-              <select id="inputState" class="form-select">
-                <option selected></option>
-                <option>admin</option>
+              <label for="role" class="form-label">Role</label>
+              <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
+              <option value="">-- Pilih Role --</option>
+                  @foreach ($roles as $role)          
+                      <option value="{{ $role->id }}" @selected($role->id == $userRole->id)>{{ $role->name }}</option>
+                  @endforeach
+              </select>
               </select>
             </div>
             <div class="text-center">
