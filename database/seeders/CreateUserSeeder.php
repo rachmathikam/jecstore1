@@ -45,6 +45,7 @@ class CreateUserSeeder extends Seeder
             'name'  => 'pelanggan',
             'email'     => 'pelanggan@gmail.com',
             'password'  => bcrypt('lecturer12345'),
+            'image'   => '',
         ]);
 
         $role           = Role::where('name', 'pelanggan')->first();

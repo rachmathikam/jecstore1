@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
+use DB;
 
 class PermissionController extends Controller
 {
@@ -22,7 +23,9 @@ class PermissionController extends Controller
 
     public function index()
     {
-        return view('pages.roles.index');
+        $permissions = Permission::get();
+        // dd($permissions);
+        return view('pages.permissions.index',compact('permissions'));
     }
 
     /**
@@ -32,6 +35,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
+
+
         return view('pages.permissions.create');
     }
 
@@ -47,9 +52,10 @@ class PermissionController extends Controller
             'name' => 'required|unique:permissions,name',
         ]);
 
-        $permission = Permission::create(['name' => $request->name]);
+        $permissions = Permission::create(['name' => $request->name]);
 
-        if ($permission) {
+
+        if ($permissions) {
             return redirect()->route('permissions.index')->with('success', 'Create Permission Successfully');
         } else {
             return redirect()->route('permissions.create')->with('error', 'Something Went Wrong!');
@@ -73,9 +79,12 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+
+        return view('pages.permissions.edit', compact('permission'));
+
+
     }
 
     /**
@@ -85,9 +94,19 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:permissions,name,'.$permission->id,
+        ]);
+
+        $permission->update($request->all());
+
+        if ($permission) {
+            return redirect()->route('permissions.index')->with('success', 'Updated Permission Successfully');
+        } else {
+            return redirect()->route('permissions.index')->with('Error', 'Something Went Wrong!');
+        }
     }
 
     /**
@@ -98,6 +117,14 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $permissions = Permission::findOrFail($id);
+        $permissions->delete();
+
+
+        if ($permissions) {
+            return redirect()->route('permissions.index')->with('success', 'Deleted Permission Successfully');
+        } else {
+            return redirect()->route('permissions.index')->with('Error', 'Something Went Wrong!');
+        }
     }
 }

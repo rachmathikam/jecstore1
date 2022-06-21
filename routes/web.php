@@ -41,13 +41,14 @@ Auth::routes();
 
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home',                 [HomeController::class, 'index'])->name('home');         
+Route::get('/home',                 [HomeController::class, 'index'])->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('permission', PermissionController::class);
+    // Route::resource('users', ProfileController::class);
+    Route::resource('permissions', PermissionController::class);
 
 
 });

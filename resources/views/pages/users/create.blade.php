@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-lg-12">
 
-     
+
 
       <div class="card">
         <div class="card-body">
@@ -67,7 +67,7 @@
               <label for="inputState" class="form-label">Role</label>
               <select id="inputState" class="form-select" name="roles">
                 <option value="" selected>Pilih</option>
-                @foreach ($roles as $role)          
+                @foreach ($roles as $role)
                 <option value="{{ $role->name }}">{{ $role->name }}</option>
                   @endforeach
               </select>
@@ -77,6 +77,15 @@
                                 </span>
                             @enderror
             </div>
+            <div class="col-md-6">
+                <label for="inputEmail5" class="form-label">Gambar</label>
+                <input type="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" id="image" name="image" >
+                    @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+              </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>

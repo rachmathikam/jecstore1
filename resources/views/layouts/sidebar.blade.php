@@ -9,7 +9,7 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-      @if(auth()->user()->can('master-permission-list')) 
+      @if(auth()->user()->can('master-permission-list'))
        <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -19,7 +19,7 @@
             <a href="{{route('users.index')}}">
               <i class="bi bi-circle"></i><span>User</span>
             </a>
-           
+
           </li>
           <li>
           <a href="{{route('roles.index')}}">
@@ -27,10 +27,10 @@
             </a>
           </li>
           <li>
-            <a href="components-badges.html">
+            <a href="{{route('permissions.index')}}">
               <i class="bi bi-circle"></i><span>Permission</span>
             </a>
-          
+
         </ul>
       </li>
       @endif
@@ -66,7 +66,7 @@
         </ul>
       </li><!-- End Forms Nav -->
       @endif
- 
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
@@ -75,9 +75,9 @@
         </a>
       </li>
 
-      
 
-      
+
+
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-error-404.html">
@@ -96,4 +96,3 @@
     </ul>
 
   </aside><!-- End Sidebar-->
-  

@@ -32,11 +32,12 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
+                            <th scope="col">Gambar</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($user as $users)
+                        @foreach($data as $users)
                         <tr>
 
                             <th scope="row">{{$loop->iteration}}</th>
@@ -44,6 +45,10 @@
                            <td>{{ $users->email }}</td>
                             @foreach($users->getRoleNames() as $role)
                             <td>{{$role}}</td>
+
+                            <td>
+                                <img src="{{ Storage::url('public/profile/').$users->image }}" class="rounded" style="width: 150px">
+                            </td>
                             @endforeach
                             <td>
                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $users->id) }}" method="POST">

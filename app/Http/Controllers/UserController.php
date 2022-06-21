@@ -18,9 +18,12 @@ class UserController extends Controller
     public function index()
     {
         $roles = Role::all();
-        $user = User::all();
+        $data = User::all();
 
-        return view('pages.users.index',compact('user','roles'));
+        // dd($data->all());
+
+
+        return view('pages.users.index',compact('data','roles'));
     }
 
     /**
@@ -51,6 +54,16 @@ class UserController extends Controller
             'roles'     => 'required|not_in:0',
         ]);
 
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('public/profile/', $file);
+            $data->image =  $filename;
+        }
+
+
+        // dd($request->all());
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         $user->assignRole($request->roles);
@@ -112,9 +125,9 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'confirmed',
-            'roles' => 'required'
+            'role' => 'required'
         ]);
-
+            // dd($request->all());
         $input = $request->all();
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
@@ -133,14 +146,6 @@ class UserController extends Controller
     }
 
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $user = User::findOrFail($id);

@@ -27,7 +27,9 @@
 
           <img src="{{asset('assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
           <h2>{{ $data->name }}</h2>
-          <h3>Web Designer</h3>
+          @foreach($data->getRoleNames() as $role)
+          <h3>{{$role}}</h3>
+          @endforeach
         </div>
       </div>
 
@@ -94,7 +96,7 @@
                 <div class="row mb-3">
                   <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Name</label>
                   <div class="col-md-8 col-lg-9">
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $data->name }}" id="username" name="name" placeholder="Enter Username">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $data->name }}" id="name" name="name" placeholder="Enter name">
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -103,6 +105,7 @@
                     <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ $data->email }}" id="email" name="email" placeholder="Enter Email">
                   </div>
                 </div>
+                @if(auth()->user()->can('manu-data-list'))
                 <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Role</label>
                     <div class="col-md-8 col-lg-9">
@@ -115,6 +118,7 @@
                             </select>
                     </div>
                   </div>
+                  @endif
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
