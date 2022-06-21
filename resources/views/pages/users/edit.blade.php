@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-lg-12">
 
-     
+
 
       <div class="card">
         <div class="card-body">
@@ -69,7 +69,7 @@
               <label for="role" class="form-label">Role</label>
               <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
               <option value="">-- Pilih Role --</option>
-                  @foreach ($roles as $role)          
+                  @foreach ($roles as $role)
                       <option value="{{ $role->id }}" @selected($role->id == $userRole->id)>{{ $role->name }}</option>
                   @endforeach
               </select>

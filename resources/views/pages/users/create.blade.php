@@ -65,13 +65,13 @@
             </div>
             <div class="col-md-12">
               <label for="inputState" class="form-label">Role</label>
-              <select id="inputState" class="form-select">
+              <select id="inputState" class="form-select" name="roles">
                 <option value="" selected>Pilih</option>
                 @foreach ($roles as $role)          
                 <option value="{{ $role->name }}">{{ $role->name }}</option>
                   @endforeach
               </select>
-              @error('role')
+              @error('roles')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

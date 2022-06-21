@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,7 @@ use App\Http\Controllers\RoleController;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -45,5 +47,7 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('permission', PermissionController::class);
+
 
 });

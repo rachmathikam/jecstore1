@@ -11,6 +11,15 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     function __construct()
+    {
+         $this->middleware('permission:permission-list|permission-create|permission-edit|permission-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:permission-create', ['only' => ['create','store']]);
+         $this->middleware('permission:permission-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:permission-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         return view('pages.roles.index');
@@ -23,7 +32,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.permissions.create');
     }
 
     /**
@@ -34,7 +43,17 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:permissions,name',
+        ]);
+
+        $permission = Permission::create(['name' => $request->name]);
+
+        if ($permission) {
+            return redirect()->route('permissions.index')->with('success', 'Create Permission Successfully');
+        } else {
+            return redirect()->route('permissions.create')->with('error', 'Something Went Wrong!');
+        }
     }
 
     /**

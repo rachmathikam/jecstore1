@@ -58,21 +58,29 @@
 
               <h5 class="card-title">Profile</h5>
 
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Name</div>
+                    <div class="col-lg-9 col-md-8">{{ $data->name }}</div>
+                </div>
               <div class="row">
-                <div class="col-lg-3 col-md-4 label ">Name</div>
-                <div class="col-lg-9 col-md-8">{{ $data->name }}</div>
-              </div>
-              <div class="row">
-                <div class="col-lg-3 col-md-4 label">Email</div>
-                <div class="col-lg-9 col-md-8">{{ $data->email }}</div>
-              </div>
+                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-9 col-md-8">{{ $data->email }}</div>
+                </div>
+                @foreach($data->getRoleNames() as $role)
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Role</div>
+                    <div class="col-lg-9 col-md-8">{{ $role}}</div>
+                </div>
 
+                @endforeach
             </div>
 
             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
               <!-- Profile Edit Form -->
-              <form>
+              <form class="row g-3" action="{{ route('users.update',$data->id) }}" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="row mb-3">
                   <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                   <div class="col-md-8 col-lg-9">
@@ -83,19 +91,30 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row mb-3">
                   <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Name</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="fullName" type="text" class="form-control" id="fullName" value="{{$data->name}}">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $data->name }}" id="username" name="name" placeholder="Enter Username">
                   </div>
-                </div>       
+                </div>
                 <div class="row mb-3">
                   <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="email" type="email" class="form-control" id="Email" value="{{$data->email}}">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ $data->email }}" id="email" name="email" placeholder="Enter Email">
                   </div>
                 </div>
+                <div class="row mb-3">
+                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Role</label>
+                    <div class="col-md-8 col-lg-9">
+                        <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
+                            <option value="">-- Pilih Role --</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" @selected($role->id == $userRole->id)>{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                            </select>
+                    </div>
+                  </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>

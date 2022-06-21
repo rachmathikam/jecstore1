@@ -17,9 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $roles = Role::all();
         $user = User::all();
-        
-        return view('pages.users.index',compact('user'));
+
+        return view('pages.users.index',compact('user','roles'));
     }
 
     /**
@@ -29,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+
         $roles  = Role::all();
         return view('pages.users.create', compact('roles'));
     }
@@ -43,17 +44,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
         $request->validate([
-            'username'  => 'required|string|max:255|unique:users',
+            'name'  => 'required|string|max:255|unique:users',
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:3|confirmed',
-            'roles'      => 'required|not_in:0',
+            'roles'     => 'required|not_in:0',
         ]);
-        
+
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
-        $user->assignRole($request->role);
+        $user->assignRole($request->roles);
         if ($user) {
             return redirect()->route('users.index')->with('success', 'Created User Successfully.');
         }
@@ -72,7 +72,7 @@ class UserController extends Controller
         $roles = Role::all();
         $userRole = $data->roles->first();
         return view('pages.users.show', compact('data','roles','userRole'));
-       
+
     }
 
     /**
@@ -97,8 +97,8 @@ class UserController extends Controller
         $userRole = $data->roles->first();
         return view('pages.users.edit', compact('data','roles','userRole'));
     }
-    
-    
+
+
     /**
     * update
     *
@@ -114,23 +114,26 @@ class UserController extends Controller
             'password' => 'confirmed',
             'roles' => 'required'
         ]);
-    
+
         $input = $request->all();
-        if(!empty($input['password'])){ 
+        if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = Arr::except($input,array('password'));    
+            $input = Arr::except($input,array('password'));
         }
         // $user->syncRole($request->input('role'));
         $user = User::findOrFail($id);
         $user->update($input);
-        
+
         // DB::table('model_has_roles')->where('model_id',$id)->delete();
-    
+
         $user->assignRole($request->input('roles'));
-        
+
         return redirect()->route('users.index')->with('success','User updated successfully');
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
