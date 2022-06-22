@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Hash;
+use App\Http\Requests\EventRequest;
 
 class UserController extends Controller
 {
@@ -44,26 +45,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        $data = $request->all();
-        $request->validate([
-            'name'  => 'required|string|max:255|unique:users',
-            'email'     => 'required|string|email|max:255|unique:users',
-            'password'  => 'required|string|min:3|confirmed',
-            'roles'     => 'required|not_in:0',
-        ]);
-
-        if($request->hasFile('image')){
+        $data = $request->validated();
+        // $data['user_id'] = auth()->user()->id;
+        if ($request->file('image')) {
             $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extension;
-            $file->move('public/profile/', $file);
-            $data->image =  $filename;
+            $nama_file = time() . str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('image/profiles', $nama_file);
+            $data['image'] = $nama_file;
         }
 
+// dd($request->all());
 
-        // dd($request->all());
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         $user->assignRole($request->roles);

@@ -47,7 +47,8 @@
                             <td>{{$role}}</td>
 
                             <td>
-                                <img src="{{ Storage::url('public/profile/').$users->image }}" class="rounded" style="width: 150px">
+                                <img src="{{ asset('image/profiles/' . $users->image) }}" width="80px">
+
                             </td>
                             @endforeach
                             <td>

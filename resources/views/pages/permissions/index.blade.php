@@ -40,7 +40,7 @@
                             <td>{{ $permission->name }}</td>
                             <td>
                             @can('permission-edit')
-                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
+                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
                             <a href="{{ route('permissions.edit', $permission->id) }}"><button type="button" class="btn btn-warning"><i class="bi bi-pencil"></i></button></a>
 
                                   @csrf
