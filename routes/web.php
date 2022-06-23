@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\TeknisiController;
+
 
 
 
@@ -32,7 +34,7 @@ Auth::routes();
 // Route::middleware(['auth'])->group(function () {
 //      Route::middleware(['user'])->group(function () {
 //         Route::get('user', [UserController::class, 'index'])->name('user');
-//         //Route::get('user/profile', [UserController::class, 'profile']);
+//         Route::get('user/profile', [UserController::class, 'profile']);
 //     });
 
 //     Route::get('/logout', function() {
@@ -51,6 +53,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('brand', BrandController::class);
+    Route::resource('teknisi', TeknisiController::class);
+
+
 
 
 });

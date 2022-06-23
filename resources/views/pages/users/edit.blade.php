@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
       <li class="breadcrumb-item"><a href="{{ route('users.index')}}">User</a></li>
-      <li class="breadcrumb-item active">Tambah User</li>
+      <li class="breadcrumb-item active">Edit User</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -25,7 +25,7 @@
           <h5 class="card-title">Edit User</h5>
 
           <!-- Multi Columns Form -->
-          <form class="row g-3" action="{{ route('users.update',$data->id) }}" method="POST">
+          <form class="row g-3" action="{{ route('users.update',$data->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
             <div class="col-md-12">
@@ -65,9 +65,10 @@
                         </span>
                     @enderror
             </div>
+            @if(auth()->user()->can('master-permission-list'))
             <div class="col-md-12">
-              <label for="role" class="form-label">Role</label>
-              <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
+              <label for="roles" class="form-label">Role</label>
+              <select name="roles" id="roles" class="form-control @error('roles') is-invalid @enderror">
               <option value="">-- Pilih Role --</option>
                   @foreach ($roles as $role)
                       <option value="{{ $role->id }}" @selected($role->id == $userRole->id)>{{ $role->name }}</option>
@@ -75,6 +76,28 @@
               </select>
               </select>
             </div>
+            @endif
+            <div class="col-md-12">
+                <label for="inputName5" class="form-label">Address</label>
+                <input type="text" class="form-control @error('address') is-invalid @enderror" value="{{ $data->address }}" id="address" name="address" placeholder="Enter address">
+                      @error('address')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                      @enderror
+              </div>
+            <div class="col-md-6">
+                <label for="inputEmail5" class="form-label">Gambar</label>
+                <input type="file" class="form-control @error('image') is-invalid @enderror" value="{{ $data->image }}" id="image" name="image" >
+                    @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    @if (strlen($data->image) > 0)
+                    <img src="{{ asset('image/profile/' . $data->image) }}" width="80px" class="mt-1">
+                @endif
+              </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>

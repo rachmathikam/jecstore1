@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Hash;
-use App\Http\Requests\EventRequest;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -27,6 +28,9 @@ class UserController extends Controller
         return view('pages.users.index',compact('data','roles'));
     }
 
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,23 +49,31 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated([
-
+        $this->validate($request, [
+            'name'          => 'required',
+            'email'         => 'required|string|email|max:255|unique:users',
+            'password'      => 'confirmed',
+            'roles'         => 'required',
+            'address'       => 'nullable',
+            'image'         => 'mimes:jpeg,png,jpg,gif,svg',
         ]);
-        // $data['user_id'] = auth()->user()->id;
+
+        $input = $request->all();
+        $input['password'] = Hash::make($request->password);
+
         if ($request->file('image')) {
             $file = $request->file('image');
             $nama_file = time() . str_replace(" ", "", $file->getClientOriginalName());
-            $file->move('image/profiles', $nama_file);
-            $data['image'] = $nama_file;
+            $file->move('image/profile', $nama_file);
+            $input['image'] = $nama_file;
         }
 
 
-        $data['password'] = Hash::make($request->password);
-        $user = User::create($data);
-        $user->assignRole($request->roles);
+
+        $user = User::create($input);
+        $user->assignRole($request->input('roles'));
         // dd($user);
         if ($user) {
             return redirect()->route('users.index')->with('success', 'Created User Successfully.');
@@ -117,26 +129,39 @@ class UserController extends Controller
     */
     public function update(Request $request,$id)
     {
+
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'confirmed',
-            'role' => 'required'
+            'name'      => 'required',
+            'email'     => 'required',
+            'address'   => 'nullable',
+            'password'  => 'confirmed',
+            'roles'      => 'required',
+
         ]);
-            // dd($request->all());
+
         $input = $request->all();
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
             $input = Arr::except($input,array('password'));
         }
+
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $nama_file = time() . str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('image/profile', $nama_file);
+            $input['image'] = $nama_file;
+        }else{
+            unset($input['image']);
+        }
         // $user->syncRole($request->input('role'));
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $user->update($input);
 
-        // DB::table('model_has_roles')->where('model_id',$id)->delete();
-
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole($request->input('roles'));
+        // dd($user);
+
 
         return redirect()->route('users.index')->with('success','User updated successfully');
     }

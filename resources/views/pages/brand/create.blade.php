@@ -9,8 +9,8 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('roles.index')}}">Roles</a></li>
-      <li class="breadcrumb-item active">Tambah Roles</li>
+      <li class="breadcrumb-item"><a href="{{ route('brand.index')}}">Brand</a></li>
+      <li class="breadcrumb-item active">Tambah Brand</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -19,14 +19,14 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tambah Role</h5>
+          <h5 class="card-title">Tambah Brand</h5>
 
           <!-- Multi Columns Form -->
           <form class="row g-3" action="{{ route('brand.store') }}" method="POST">
           @csrf
             <div class="col-md-12">
               <label for="inputName5" class="form-label">Name</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Enter Name">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Enter Name" autofocus>
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

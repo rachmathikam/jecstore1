@@ -10,7 +10,7 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
-      <li class="breadcrumb-item active">Roles</li>
+      <li class="breadcrumb-item active">Brand</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -21,7 +21,7 @@
       <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <h5 class="card-title">Roles Management</h5>
+                <h5 class="card-title">Brand Devices</h5>
                 <a href="{{ route('brand.create')}}"><button type="button" class="btn btn-success">Tambah<i class="bi bi-plus"></i></button></a>
                 <table class="table datatable" style="width: 100%; white-space: nowrap">
                     <thead>

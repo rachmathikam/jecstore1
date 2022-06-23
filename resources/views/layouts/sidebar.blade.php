@@ -49,7 +49,7 @@
           @endif
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="{{route ('teknisi.index')}}">
               <i class="bi bi-circle"></i><span>Data Teknisi</span>
             </a>
           </li>
@@ -75,7 +75,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route ('brand.index')}}">
-          <i class="bi bi-envelope"></i>
+            <i class="bx bxs-customize"></i>
           <span>brand</span>
         </a>
       </li>
