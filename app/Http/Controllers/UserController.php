@@ -47,7 +47,9 @@ class UserController extends Controller
      */
     public function store(EventRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->validated([
+
+        ]);
         // $data['user_id'] = auth()->user()->id;
         if ($request->file('image')) {
             $file = $request->file('image');
@@ -56,11 +58,11 @@ class UserController extends Controller
             $data['image'] = $nama_file;
         }
 
-// dd($request->all());
 
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         $user->assignRole($request->roles);
+        // dd($user);
         if ($user) {
             return redirect()->route('users.index')->with('success', 'Created User Successfully.');
         }

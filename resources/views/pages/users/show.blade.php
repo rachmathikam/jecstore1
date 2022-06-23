@@ -25,7 +25,7 @@
       <div class="card">
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-          <img src="{{asset('assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+          <img src="{{ asset('image/profiles/' . $data->image) }}" alt="Profile" class="rounded-circle">
           <h2>{{ $data->name }}</h2>
           @foreach($data->getRoleNames() as $role)
           <h3>{{$role}}</h3>
@@ -86,12 +86,12 @@
                 <div class="row mb-3">
                   <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                   <div class="col-md-8 col-lg-9">
-                    <img src="{{asset('assets/img/profile-img.jpg')}}" alt="Profile">
-                    <div class="pt-2">
-                      <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                      <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                    </div>
+                    @if($data ==! null)
+                    <img src="{{ asset('image/profiles/' . $data->image) }}" alt="Profile">
                   </div>
+                  @else
+                  <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile">
+                  @endif
                 </div>
                 <div class="row mb-3">
                   <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Name</label>

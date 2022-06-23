@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Student;
-use App\Models\Lecturer;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 

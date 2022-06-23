@@ -29,39 +29,39 @@
           @csrf
             <div class="col-md-12">
               <label for="inputName5" class="form-label">Name</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Enter Username">
+                 <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Enter Username">
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                    <div class="col-md-6">
-                      <label for="inputEmail5" class="form-label">Email</label>
-                      <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email" name="email" placeholder="Enter Email">
-                          @error('email')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                          @enderror
-                    </div>
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword5" class="form-label">Password</label>
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                 <div class="col-md-6">
+              <label for="inputEmail5" class="form-label">Email</label>
+             <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email" name="email" placeholder="Enter Email">
+            @error('email')
+        <span class="invalid-feedback" role="alert">
+    <strong>{{ $message }}</strong>
+        </span>
+             @enderror
+              </div>
+                  </div>
+                       <div class="col-md-6">
+                           <label for="inputPassword5" class="form-label">Password</label>
+                              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
               @error('password')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword5" class="form-label">Confirm Password</label>
-              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+            <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+     </span>
+            @enderror
+                     </div>
+                         <div class="col-md-6">
+                     <label for="inputPassword5" class="form-label">Confirm Password</label>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+            @enderror
             </div>
             <div class="col-md-12">
               <label for="inputState" class="form-label">Role</label>
@@ -72,10 +72,10 @@
                   @endforeach
               </select>
               @error('roles')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+             @enderror
             </div>
             <div class="col-md-6">
                 <label for="inputEmail5" class="form-label">Gambar</label>

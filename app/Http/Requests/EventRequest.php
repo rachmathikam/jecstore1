@@ -28,7 +28,7 @@ class EventRequest extends FormRequest
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:3|confirmed',
             'roles'     => 'required|not_in:0',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }

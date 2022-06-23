@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\BrandController;
+
 
 
 /*
@@ -47,8 +49,8 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    // Route::resource('users', ProfileController::class);
     Route::resource('permissions', PermissionController::class);
+    Route::resource('brand', BrandController::class);
 
 
 });

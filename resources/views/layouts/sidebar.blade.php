@@ -67,15 +67,18 @@
       </li><!-- End Forms Nav -->
       @endif
 
-
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>
       </li>
-
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route ('brand.index')}}">
+          <i class="bi bi-envelope"></i>
+          <span>brand</span>
+        </a>
+      </li>
 
 
 
