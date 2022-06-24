@@ -21,6 +21,7 @@ class  DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             CreateTeknisiSeeder::class,
             CreateBrandSeeder::class,
+            CreatePelangganSeeder::class,
         ]);
     }
 }

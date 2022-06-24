@@ -31,6 +31,7 @@ class PermissionTableSeeder extends Seeder
             'menu-data-list',
             'list-pelanggan',
             'master-permission-list',
+            'user-permission',
         ];
 
         foreach ($permissions as $permission) {

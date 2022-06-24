@@ -15,10 +15,10 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-
+        @can('permission-list')
         <a href="{{ route('users.index') }}"><button type="button" class="btn btn-success" style="margin-bottom:10px"><i
                     class="bi bi-arrow-left">Kembali</i></button></a>
-
+        @endcan
         <section class="section profile">
             <div class="row">
                 <div class="col-xl-4">

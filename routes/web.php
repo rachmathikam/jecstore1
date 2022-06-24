@@ -7,6 +7,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\TeknisiController;
+use App\Http\Controllers\PelangganController;
+
 
 
 
@@ -54,6 +56,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('permissions', PermissionController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('teknisi', TeknisiController::class);
+    Route::resource('pelanggan', PelangganController::class);
+
 
 
 

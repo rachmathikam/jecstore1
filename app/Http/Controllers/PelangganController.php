@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 use Hash;
 use DB;
 
-class TeknisiController extends Controller
+class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,9 @@ class TeknisiController extends Controller
      */
     public function index()
     {
-        $teknisi = User::role('teknisi')->where('id', auth()->user()->id)->get();
+        $pelanggan = User::role('pelanggan')->where('id',auth()->user()->id)->get();
         // dd($data);
-        //  $teknisi = User::role('teknisi')->get();
-        return view('pages.teknisi.index', compact('teknisi'));
+        return view('pages.pelanggan.index', compact('pelanggan'));
     }
 
     /**
@@ -30,9 +29,9 @@ class TeknisiController extends Controller
      */
     public function create()
     {
-        $teknisi = User::role('teknisi')->get();
+        $pelanggan = User::role('pelanggan')->get();
 
-        return view('pages.teknisi.create', compact('teknisi'));
+        return view('pages.pelanggan.create', compact('pelanggan'));
     }
 
     /**
@@ -63,11 +62,11 @@ class TeknisiController extends Controller
 
 
 
-        $teknisi = User::create($input);
-        $teknisi->assignRole($request->input('roles'));
-        dd($teknisi);
+        $pelanggan = User::create($input);
+        $pelanggan->assignRole($request->input('roles'));
+        dd($pelanggan);
         // dd($user);
-        if ($teknisi) {
+        if ($pelanggan) {
             return redirect()->route('users.index')->with('success', 'Created User Successfully.');
         }
     }
@@ -91,10 +90,10 @@ class TeknisiController extends Controller
      */
     public function edit($id)
     {
-        $teknisi = User::findOrFail($id);
+        $pelanggan = User::findOrFail($id);
         $roles = Role::all();
-        $userRole = $teknisi->roles->first();
-        return view('pages.teknisi.edit', compact('teknisi','roles','userRole'));
+        $userRole = $pelanggan->roles->first();
+        return view('pages.pelanggan.edit', compact('pelanggan','roles','userRole'));
         // dd();
 
     }
@@ -106,7 +105,7 @@ class TeknisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, Post $post)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name'      => 'required',
@@ -118,8 +117,7 @@ class TeknisiController extends Controller
 
         ]);
 
-
-
+        // dd($request);
         $input = $request->all();
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
@@ -135,18 +133,15 @@ class TeknisiController extends Controller
         }else{
             unset($input['image']);
         }
-
-
         // $user->syncRole($request->input('role'));
-        $teknisi = User::findOrFail(auth()->id());
-
-        $teknisi->update($input);
+        $pelanggan = User::findOrFail(auth()->id());
+        $pelanggan->update($input);
 
         // DB::table('model_has_roles')->where('model_id',$id)->delete();
-        // $teknisi->assignRole($request->input('roles'));
+        // $pelanggan->assignRole($request->input('roles'));
 
 
-        return redirect()->route('teknisi.index')->with('success','User updated successfully');
+        return redirect()->route('pelanggan.index')->with('success','User updated successfully');
     }
 
     /**
@@ -157,6 +152,14 @@ class TeknisiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pelanggan = User::findOrFail($id);
+        $pelanggan->delete();
+        if($pelanggan){
+            //redirect dengan pesan sukses
+            return redirect()->route('pelanggan.index')->with(['success' => 'Data Berhasil Dihapus!']);
+         }else{
+           //redirect dengan pesan error
+           return redirect()->route('pelanggan.index')->with(['error' => 'Data Gagal Dihapus!']);
+         }
     }
 }

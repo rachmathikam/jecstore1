@@ -10,7 +10,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Teknisi</li>
+                    <li class="breadcrumb-item active">Pelanggan</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -21,12 +21,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <h5 class="card-title">Data Teknisi</h5>
+                                <h5 class="card-title">Data Pelanggan</h5>
                                 {{-- @can('user-create')
                                     <a href="{{ route('teknisi.create') }}"><button type="button"
                                             class="btn btn-success">Tambah<i class="bi bi-plus"></i></button></a>
                                 @endcan --}}
-                                 <table class="table datatable" style="width: 100%; white-space: nowrap">
+                                <table class="table datatable" style="width: 100%; white-space: nowrap">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -37,13 +37,13 @@
                                             <th scope="col">Gambar</th>
 
                                             @can('user-update')
-                                            <th scope="col">Action</th>
+                                                <th scope="col">Action</th>
                                             @endcan
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($teknisi as $users)
+                                        @foreach ($pelanggan as $users)
                                             <tr>
 
                                                 <th scope="row">{{ $loop->iteration }}</th>
@@ -61,20 +61,23 @@
                                                 @endforeach
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                        action="{{ route('teknisi.destroy', $users->id) }}" method="POST">
-                                                     <a href="{{ route('teknisi.edit', $users->id) }}"><button
-                                                        type="button" class="btn btn-warning"><i
-                                                        class="bi bi-pencil"></i></button></a>
-
-
+                                                        action="{{ route('pelanggan.destroy', $users->id) }}"
+                                                        method="POST">
+                                                        {{-- <a href="{{ route('pelanggan.show', $users->id) }}"><button
+                                                                type="button" class="btn btn-primary"><i
+                                                                    class="bi bi-info-circle"></i></button></a> --}}
+                                                        @can('user-edit')
+                                                            <a href="{{ route('pelanggan.edit', $users->id) }}"><button
+                                                                    type="button" class="btn btn-warning"><i
+                                                                        class="bi bi-pencil"></i></button></a>
+                                                        @endcan
                                                         @csrf
                                                         @method('DELETE')
                                                         @can('user-delete')
-
-                                                        <button type="submit" class="btn btn-danger"><i
-                                                            class="bi bi-trash"></i></button>
+                                                            <button type="submit" class="btn btn-danger"><i
+                                                                    class="bi bi-trash"></i></button>
                                                             <!--  -->
-                                                            @endcan
+                                                        @endcan
                                                     </form>
 
                                                 </td>

@@ -43,15 +43,18 @@
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
           @if(auth()->user()->can('list-pelanggan'))
-            <a href="forms-elements.html">
+            <a href="{{route('pelanggan.index')}}">
               <i class="bi bi-circle"></i><span>Data Pelanggan</span>
             </a>
           @endif
           </li>
           <li>
+          @if(auth()->user()->can('list-pelanggan'))
             <a href="{{route ('teknisi.index')}}">
               <i class="bi bi-circle"></i><span>Data Teknisi</span>
             </a>
+          @endif
+
           </li>
           <li>
             <a href="forms-editors.html">
@@ -61,6 +64,11 @@
           <li>
             <a href="forms-validation.html">
               <i class="bi bi-circle"></i><span>Data Sperpat</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-validation.html">
+              <i class="bi bi-circle"></i><span>Type Device</span>
             </a>
           </li>
         </ul>
