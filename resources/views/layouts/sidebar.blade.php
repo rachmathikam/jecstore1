@@ -62,12 +62,12 @@
             </a>
           </li>
           <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Data Sperpat</span>
+            <a href="{{route('sparepat.index')}}">
+              <i class="bi bi-circle"></i><span>Data Sparepat</span>
             </a>
           </li>
           <li>
-            <a href="forms-validation.html">
+            <a href="{{route ('type.index')}}">
               <i class="bi bi-circle"></i><span>Type Device</span>
             </a>
           </li>

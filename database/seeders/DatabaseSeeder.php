@@ -22,6 +22,7 @@ class  DatabaseSeeder extends Seeder
             CreateTeknisiSeeder::class,
             CreateBrandSeeder::class,
             CreatePelangganSeeder::class,
+            CreateTypeDeviceSeeder::class,
         ]);
     }
 }

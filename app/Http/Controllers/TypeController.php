@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Type;
 
 class TypeController extends Controller
 {
@@ -13,7 +14,9 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $item = Type::all();
+        // dd($item);
+        return view('pages.type.index',compact('item'));
     }
 
     /**
@@ -23,7 +26,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $item = Type::get();
+        return view('pages.type.create',compact('item'));
     }
 
     /**
@@ -34,7 +38,20 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'seri' => 'required',
+
+        ]);
+
+        $item = Type::create(['name' => $request->name,
+                              'seri' => $request->seri]);
+
+        if($item){
+            return redirect()->route('type.index')->with('success', 'data was successfully Created');
+        }else{
+            return redirect()->route('type.create')->with('failed', 'failed created data');
+        }
     }
 
     /**
@@ -45,7 +62,7 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +73,9 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Type::find($id);
+        // dd($item);
+        return view('pages.type.edit',compact('item'));
     }
 
     /**
@@ -68,7 +87,17 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'seri' => 'required',
+        ]);
+
+        $data = $request->all();
+        $item = Type::findOrFail($id);
+        $item->update($data);
+        // dd($item);
+        return redirect()->route('type.index')
+                        ->with('success','data updated successfully');
     }
 
     /**
@@ -79,6 +108,14 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Type::findOrFail($id);
+        $item->delete();
+        if($item){
+            //redirect dengan pesan sukses
+            return redirect()->route('type.index')->with(['success' => 'Data Berhasil Dihapus!']);
+         }else{
+           //redirect dengan pesan error
+           return redirect()->route('type.index')->with(['error' => 'Data Gagal Dihapus!']);
+         }
     }
 }

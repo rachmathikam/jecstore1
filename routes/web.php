@@ -8,6 +8,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\TypeController;
+use App\Http\Controllers\SparepatController;
 
 
 
@@ -57,9 +59,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('brand', BrandController::class);
     Route::resource('teknisi', TeknisiController::class);
     Route::resource('pelanggan', PelangganController::class);
-
-
-
+    Route::resource('type', TypeController::class);
+    Route::resource('sparepat', SparepatController::class);
 
 
 });

@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Sparepat extends Model
 {
     use HasFactory;
-    protected $table = 'type_device';
 
+    protected $table = 'sparepat';
     protected $fillable = [
-        'name',
-        'seri',
-
+        'name' => 'name',
     ];
+
+
+
 }
