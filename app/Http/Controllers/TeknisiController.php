@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Hash;
+use DB;
 
 class TeknisiController extends Controller
 {
@@ -87,6 +90,11 @@ class TeknisiController extends Controller
      */
     public function edit($id)
     {
+        $teknisi = User::findOrFail($id);
+        $roles = Role::all();
+        $userRole = $teknisi->roles->first();
+        return view('pages.teknisi.edit', compact('teknisi','roles','userRole'));
+        // dd();
 
     }
 
@@ -99,7 +107,41 @@ class TeknisiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name'      => 'required',
+            'email'     => 'required',
+            'address'   => 'nullable',
+            'password'  => 'confirmed',
+            // 'roles'     => 'nullable',
+            'image'     => 'mimes:jpeg,png,jpg,gif,svg',
 
+        ]);
+
+        // dd($request);
+        $input = $request->all();
+        if(!empty($input['password'])){
+            $input['password'] = Hash::make($input['password']);
+        }else{
+            $input = Arr::except($input,array('password'));
+        }
+
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $nama_file = time() . str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('image/profile', $nama_file);
+            $input['image'] = $nama_file;
+        }else{
+            unset($input['image']);
+        }
+        // $user->syncRole($request->input('role'));
+        $teknisi = User::find($id);
+        $teknisi->update($input);
+
+        // DB::table('model_has_roles')->where('model_id',$id)->delete();
+        // $teknisi->assignRole($request->input('roles'));
+
+
+        return redirect()->route('teknisi.index')->with('success','User updated successfully');
     }
 
     /**

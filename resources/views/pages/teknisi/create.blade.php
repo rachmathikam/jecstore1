@@ -9,8 +9,8 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('teknisi.index') }}">User</a></li>
-                    <li class="breadcrumb-item active">Create User</li>
+                    <li class="breadcrumb-item"><a href="{{ route('teknisi.index') }}">Teknisi</a></li>
+                    <li class="breadcrumb-item active">Create Teknisi</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -67,6 +67,7 @@
                                         </span>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-12">
                                     <label for="inputName5" class="form-label">Alamat</label>
                                     <input type="text" class="form-control @error('address') is-invalid @enderror"

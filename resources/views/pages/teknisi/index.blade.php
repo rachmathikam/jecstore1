@@ -23,7 +23,7 @@
                             <div class="table-responsive">
                                 <h5 class="card-title">Data Teknisi</h5>
                                 @can('user-create')
-                                    <a href="{{ route('users.create') }}"><button type="button"
+                                    <a href="{{ route('teknisi.create') }}"><button type="button"
                                             class="btn btn-success">Tambah<i class="bi bi-plus"></i></button></a>
                                 @endcan
                                  <table class="table datatable" style="width: 100%; white-space: nowrap">
@@ -35,7 +35,11 @@
                                             <th scope="col">Adress</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Gambar</th>
+
+                                            @can('user-update')
                                             <th scope="col">Action</th>
+                                            @endcan
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,19 +61,22 @@
                                                 @endforeach
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                        action="{{ route('users.destroy', $users->id) }}" method="POST">
-                                                        <a href="{{ route('users.show', $users->id) }}"><button
+                                                        action="{{ route('teknisi.destroy', $users->id) }}" method="POST">
+                                                        {{-- <a href="{{ route('teknisi.show', $users->id) }}"><button
                                                                 type="button" class="btn btn-primary"><i
-                                                                    class="bi bi-info-circle"></i></button></a>
-                                                        <a href="{{ route('users.edit', $users->id) }}"><button
+                                                                    class="bi bi-info-circle"></i></button></a> --}}
+                                                        <a href="{{ route('teknisi.edit', $users->id) }}"><button
                                                                 type="button" class="btn btn-warning"><i
                                                                     class="bi bi-pencil"></i></button></a>
 
                                                         @csrf
                                                         @method('DELETE')
+                                                        @can('user-delete')
+
                                                         <button type="submit" class="btn btn-danger"><i
-                                                                class="bi bi-trash"></i></button>
-                                                        <!--  -->
+                                                            class="bi bi-trash"></i></button>
+                                                            <!--  -->
+                                                            @endcan
                                                     </form>
 
                                                 </td>
