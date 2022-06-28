@@ -20,9 +20,11 @@ class  DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             CreateAdminUserSeeder::class,
             CreateTeknisiSeeder::class,
+            // CreateKomponenSeeder::class,
             CreateBrandSeeder::class,
             CreatePelangganSeeder::class,
             CreateTypeDeviceSeeder::class,
+            // CreateContactSeeder::class,
         ]);
     }
 }

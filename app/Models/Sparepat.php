@@ -9,11 +9,14 @@ class Sparepat extends Model
 {
     use HasFactory;
 
-    protected $table = 'sparepat';
+    protected $table = 'spareparts';
     protected $fillable = [
-        'name' => 'name',
+        'sparepart' => 'sparepart',
     ];
 
-
+    /* public function brand()
+    {
+        return $this->hasMany(Brand::class);
+    } */
 
 }

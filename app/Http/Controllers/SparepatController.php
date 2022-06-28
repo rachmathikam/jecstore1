@@ -14,8 +14,8 @@ class SparepatController extends Controller
      */
     public function index()
     {
-        $item = Sparepat::get();
-        return view('pages.sparepat.index',compact('item'));
+        $spareparts = Sparepat::all();
+        return view('pages.sparepat.index',compact('spareparts'));
     }
 
     /**
@@ -25,7 +25,7 @@ class SparepatController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.sparepat.create');
     }
 
     /**
@@ -36,7 +36,18 @@ class SparepatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'sparepart' => 'required',
+        ]);
+
+        $data = $request->all();
+        $sparepart = Sparepat::create($data);
+
+        if($sparepart){
+            return redirect()->route('sparepat.index')->with('success', 'data was successfully Created');
+        }else{
+            return redirect()->route('sparepat.create')->with('failed', 'failed created data');
+        }
     }
 
     /**
@@ -58,7 +69,8 @@ class SparepatController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Sparepat::find($id);
+        return view('pages.sparepat.edit',compact('item'));
     }
 
     /**
@@ -70,7 +82,16 @@ class SparepatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'sparepat' => 'required',
+        ]);
+        $item = Sparepat::find($id);
+        $item->sparepat = $request->input('sparepat');
+        // dd($item);
+        $item->save();
+
+    return redirect()->route('sparepat.index')
+                ->with('success','sparepart updated successfully');
     }
 
     /**

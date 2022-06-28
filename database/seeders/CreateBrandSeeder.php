@@ -16,7 +16,7 @@ class CreateBrandSeeder extends Seeder
     public function run()
     {
         $brand = Brand::create([
-            'name' => 'Samsung',
+            'brand' => 'Samsung',
         ]);
     }
 }

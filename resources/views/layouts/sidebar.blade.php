@@ -67,6 +67,11 @@
             </a>
           </li>
           <li>
+            <a href="{{route('komponen.index')}}">
+              <i class="bi bi-circle"></i><span>Data Komponen</span>
+            </a>
+          </li>
+          <li>
             <a href="{{route ('type.index')}}">
               <i class="bi bi-circle"></i><span>Type Device</span>
             </a>
@@ -76,7 +81,7 @@
       @endif
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="{{route ('contact.index')}}">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>

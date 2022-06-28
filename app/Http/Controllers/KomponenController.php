@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Type;
+use App\Models\Komponen;
 use App\Models\Brand;
+use App\Models\Type;
+use App\Models\Sparepat;
 
-class TypeController extends Controller
+class KomponenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +17,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $item = Type::all();
-        // dd($item);
-        return view('pages.type.index',compact('item'));
+        $item = Komponen::with('brand', 'type', 'sparepart')->get();
+        return view('pages.komponen.index',compact('item'));
     }
 
     /**
@@ -27,8 +28,10 @@ class TypeController extends Controller
      */
     public function create()
     {
-        $brands = Brand::get();
-        return view('pages.type.create',compact('brands'));
+        $brands = Brand::all();
+        $types = Type::all();
+        $spareparts = Sparepat::all();
+        return view('pages.komponen.create',compact('brands','types','spareparts'));
     }
 
     /**
@@ -40,19 +43,21 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required',
+            'komponen' => 'required',
+            'harga' => 'required',
+            'type_id' => 'required',
             'brand_id' => 'required',
+            'sparepart_id' => 'required',
 
 
         ]);
+        $input = $request->all();
+        $item = Komponen::create($input);
 
-        $data = $request->all();
-        $type = Type::create($data);
-
-        if($type){
-            return redirect()->route('type.index')->with('success', 'data was successfully Created');
+        if($item){
+            return redirect()->route('komponen.index')->with('success', 'data was successfully Created');
         }else{
-            return redirect()->route('type.create')->with('failed', 'failed created data');
+            return redirect()->route('komponen.create')->with('failed', 'failed created data');
         }
     }
 
@@ -64,7 +69,7 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -75,9 +80,8 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        $item = Type::find($id);
-        // dd($item);
-        return view('pages.type.edit',compact('item'));
+        $item = Komponen::find($id);
+        return view('pages.komponen.edit',compact('item'));
     }
 
     /**
@@ -89,17 +93,19 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'type' => 'required',
-
+        $this->validate($request,[
+            'komponen' => 'required',
+            'harga' => 'required',
         ]);
-
-        $data = $request->all();
-        $item = Type::findOrFail($id);
-        $item->update($data);
+        // $input = $request->all();
+        $item = Komponen::find($id);
+        $item->komponen = $request->input('komponen');
+        $item->harga = $request->input('harga');
         // dd($item);
-        return redirect()->route('type.index')
-                        ->with('success','data updated successfully');
+        $item->save();
+
+    return redirect()->route('komponen.index')
+                ->with('success','sparepart updated successfully');
     }
 
     /**
@@ -110,14 +116,6 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        $item = Type::findOrFail($id);
-        $item->delete();
-        if($item){
-            //redirect dengan pesan sukses
-            return redirect()->route('type.index')->with(['success' => 'Data Berhasil Dihapus!']);
-         }else{
-           //redirect dengan pesan error
-           return redirect()->route('type.index')->with(['error' => 'Data Gagal Dihapus!']);
-         }
+        //
     }
 }

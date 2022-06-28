@@ -13,13 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_device', function (Blueprint $table) {
+        Schema::create('komponens', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('komponen');
+            $table->string('harga');
+            $table->integer('stock');
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')
                         ->references('id')
                         ->on('brands')
+                        ->onUpdate('cascade');
+            $table->unsignedBigInteger('type_id');
+            $table->foreign('type_id')
+                        ->references('id')
+                        ->on('type_device')
+                        ->onUpdate('cascade');
+            $table->unsignedBigInteger('sparepart_id');
+            $table->foreign('sparepart_id')
+                        ->references('id')
+                        ->on('spareparts')
                         ->onUpdate('cascade');
             $table->timestamps();
         });
@@ -32,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_device');
+        Schema::dropIfExists('komponens');
     }
 };

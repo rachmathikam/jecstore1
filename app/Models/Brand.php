@@ -8,11 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
-    protected $table = 'brand';
+    protected $table = 'brands';
     protected $fillable = [
-        'name',
-
-
+        'brand',
 
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    public function komponen()
+    {
+        return $this->belongsTo(Komponen::class);
+    }
+
+    public function sparepart()
+    {
+        return $this->belongsTo(Sparepart::class);
+    }
 }

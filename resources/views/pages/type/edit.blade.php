@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
       <li class="breadcrumb-item"><a href="{{ route('type.index')}}">Type</a></li>
-      <li class="breadcrumb-item active">Tambah Type</li>
+      <li class="breadcrumb-item active">Editcd Type</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -26,28 +26,16 @@
           @method('PUT')
             <div class="col-md-12">
               <label for="inputName5" class="form-label">Type</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $item->name }}" id="username" name="name" placeholder="Enter Username">
-                    @error('name')
+              <input type="text" class="form-control @error('type') is-invalid @enderror" value="{{ $item->type }}" id="username" name="type" placeholder="Enter Username">
+                    @error('type')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-12">
-                    <label for="inputName5" class="form-label">Seri</label>
-                    <input type="text" class="form-control @error('seri') is-invalid @enderror" value="{{ $item->seri }}" id="username" name="seri" placeholder="Enter Username">
-                          @error('seri')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                          @enderror
-                      </div>
-                @can('menu-data-list')
-
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                @endcan
           </form><!-- End Multi Columns Form -->
 
         </div>

@@ -1,0 +1,107 @@
+@extends('../layouts.apps')
+@section('title', 'Dashboard')
+@section('content')
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Form Layouts</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('komponen.index') }}">Komponen</a></li>
+                    <li class="breadcrumb-item active">Tambah Komponen</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tambah Komponen</h5>
+
+                            <!-- Multi Columns Form -->
+                            <form class="row g-3" action="{{ route('komponen.store') }}" method="POST">
+                                @csrf
+                                <div class="col-md-12">
+                                    <label for="inputName5" class="form-label">Komponen</label>
+                                    <input type="text" class="form-control @error('komponen') is-invalid @enderror"
+                                        value="{{ old('komponen') }}" id="name" name="komponen"
+                                        placeholder="Enter Name" autofocus>
+                                    @error('komponen')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputName5" class="form-label">Harga</label>
+                                    <input type="text" class="form-control @error('harga') is-invalid @enderror"
+                                        value="{{ old('harga') }}" id="name" name="harga" placeholder="Enter Harga"
+                                        autofocus>
+                                    @error('harga')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputState" class="form-label">Brand</label>
+                                    <select id="inputState" class="form-select" name="brand_id">
+                                        <option value="" selected>Pilih</option>
+                                        @foreach ($brands as $brand)
+                                            <option value="{{ $brand->id }}">{{ $brand->brand }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('brand_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputState" class="form-label">Type</label>
+                                    <select id="inputState" class="form-select" name="type_id">
+                                        <option value="" selected>Pilih</option>
+                                        @foreach ($types as $type)
+                                            <option value="{{ $type->id }}">{{ $type->type }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('type_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputState" class="form-label">Sparepart</label>
+                                    <select id="inputState" class="form-select" name="sparepart_id">
+                                        <option value="" selected>Pilih</option>
+                                        @foreach ($spareparts as $sparepart)
+                                            <option value="{{ $sparepart->id }}">{{ $sparepart->sparepart }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('sparepart_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form><!-- End Multi Columns Form -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+
+@endsection

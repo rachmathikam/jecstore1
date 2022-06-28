@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Type;
 
 class BrandController extends Controller
 {
@@ -14,9 +15,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $item = Brand::all();
+        $brands = Brand::all();
         // dd($item);
-        return view('pages.brand.index',compact('item'));
+        return view('pages.brand.index',compact('brands'));
     }
 
     /**
@@ -26,8 +27,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        $item = Brand::get();
-        return view('pages.brand.create',compact('item'));
+        return view('pages.brand.create');
     }
 
     /**
@@ -39,11 +39,12 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'brand' => 'required',
 
         ]);
+        // dd($request);
 
-        $item = Brand::create(['name' => $request->name]);
+        $item = Brand::create(['brand' => $request->brand]);
 
         if($item){
             return redirect()->route('brand.index')->with('success', 'data was successfully Created');
@@ -86,13 +87,13 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request, [
-            'name' => 'required',
-            // 'permission' => 'required',
-        ]);
         // dd($request->all());
+        $this->validate($request, [
+            'brand' => 'required',
+
+        ]);
         $item = Brand::find($id);
-        $item->name = $request->input('name');
+        $item->brand = $request->input('brand');
         $item->save();
         return redirect()->route('brand.index')
                         ->with('success','Role updated successfully');

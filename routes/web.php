@@ -10,6 +10,10 @@ use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\SparepatController;
+use App\Http\Controllers\KomponenController;
+use App\Http\Controllers\ContactController;
+
+
 
 
 
@@ -61,6 +65,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('pelanggan', PelangganController::class);
     Route::resource('type', TypeController::class);
     Route::resource('sparepat', SparepatController::class);
+    Route::resource('komponen', KomponenController::class);
+    Route::resource('contact', ContactController::class);
+
+
 
 
 });

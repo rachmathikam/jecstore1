@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Type;
-use App\Models\Brand;
 
-class TypeController extends Controller
+use App\Models\Contact;
+
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $item = Type::all();
-        // dd($item);
-        return view('pages.type.index',compact('item'));
+        $contacts = Contact::all();
+        return view('pages.contact.index',compact('contacts'));
     }
 
     /**
@@ -27,8 +26,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        $brands = Brand::get();
-        return view('pages.type.create',compact('brands'));
+
+        return view('pages.contact.create');
     }
 
     /**
@@ -39,21 +38,26 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'type' => 'required',
-            'brand_id' => 'required',
-
+        $this->validate($request,[
+            'user_name' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'pesan' => 'required',
 
         ]);
+        // dd($request);
 
         $data = $request->all();
-        $type = Type::create($data);
 
-        if($type){
-            return redirect()->route('type.index')->with('success', 'data was successfully Created');
+        $contact = Contact::create($data);
+
+        if($contact){
+            return redirect()->route('contact.index')->with('Success', 'Contact created successfully.');
         }else{
-            return redirect()->route('type.create')->with('failed', 'failed created data');
+
+            return redirect()->route('contact.create')->with('Success', 'Contact created successfully.');
         }
+
     }
 
     /**
@@ -64,7 +68,7 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -75,9 +79,7 @@ class TypeController extends Controller
      */
     public function edit($id)
     {
-        $item = Type::find($id);
-        // dd($item);
-        return view('pages.type.edit',compact('item'));
+        //
     }
 
     /**
@@ -89,17 +91,7 @@ class TypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'type' => 'required',
-
-        ]);
-
-        $data = $request->all();
-        $item = Type::findOrFail($id);
-        $item->update($data);
-        // dd($item);
-        return redirect()->route('type.index')
-                        ->with('success','data updated successfully');
+        //
     }
 
     /**
@@ -110,14 +102,14 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        $item = Type::findOrFail($id);
-        $item->delete();
-        if($item){
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        if($contact){
             //redirect dengan pesan sukses
-            return redirect()->route('type.index')->with(['success' => 'Data Berhasil Dihapus!']);
+            return redirect()->route('contact.index')->with(['success' => 'Data Berhasil Dihapus!']);
          }else{
            //redirect dengan pesan error
-           return redirect()->route('type.index')->with(['error' => 'Data Gagal Dihapus!']);
+           return redirect()->route('contact.index')->with(['error' => 'Data Gagal Dihapus!']);
          }
     }
 }

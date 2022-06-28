@@ -9,8 +9,8 @@
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ route('home')}}">Home</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('type.index')}}">Type Device</a></li>
-      <li class="breadcrumb-item active">Tambah Type Device</li>
+      <li class="breadcrumb-item"><a href="{{ route('sparepat.index')}}">sparepat</a></li>
+      <li class="breadcrumb-item active">Tambah sparepat </li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -19,30 +19,20 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Tambah Type Device</h5>
+          <h5 class="card-title">Tambah sparepat </h5>
 
           <!-- Multi Columns Form -->
-          <form class="row g-3" action="{{ route('type.store') }}" method="POST">
+          <form class="row g-3" action="{{ route('sparepat.store') }}" method="POST">
           @csrf
             <div class="col-md-12">
-              <label for="inputName5" class="form-label">Type</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" id="name" name="name" placeholder="Enter Name" autofocus>
-                    @error('name')
+              <label for="inputName5" class="form-label">Name</label>
+              <input type="text" class="form-control @error('sparepart') is-invalid @enderror" value="{{ old('sparepat') }}" id="sparepart" name="sparepart" placeholder="Enter sparepat" autofocus>
+                    @error('sparepart')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div>
-                <div class="col-md-12">
-                    <label for="inputName5" class="form-label">seri</label>
-                    <input type="text" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" id="type" name="seri" placeholder="Enter Name" autofocus>
-                          @error('type')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-
-                          @enderror
-                      </div>
+            </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>

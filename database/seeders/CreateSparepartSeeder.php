@@ -16,8 +16,7 @@ class CreateSparepartSeeder extends Seeder
     {
          $sparepat = Sparepat::create([
                 'name' => 'LCD',
-                'stock'=> 29,
-                'harga'=> 'RP 400.000',
+
          ]);
     }
 }

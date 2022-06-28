@@ -1,12 +1,12 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Komponen;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Type;
 
-class CreateTypeDeviceSeeder extends Seeder
+
+class CreateKomponenSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class CreateTypeDeviceSeeder extends Seeder
      */
     public function run()
     {
-        $typedevice = Type::create([
-            'type' => 'Galaxy',
-            'brand_id' => 1,
+        $komponen = Komponen::create([
+            'komponen' => '7+',
+            'harga' => 'RP.200.000'
         ]);
     }
 }

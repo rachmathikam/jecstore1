@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_device', function (Blueprint $table) {
+        Schema::create('spareparts', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->unsignedBigInteger('brand_id');
-            $table->foreign('brand_id')
-                        ->references('id')
-                        ->on('brands')
-                        ->onUpdate('cascade');
+            $table->string('sparepart');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_device');
+        Schema::dropIfExists('spareparts');
     }
 };
