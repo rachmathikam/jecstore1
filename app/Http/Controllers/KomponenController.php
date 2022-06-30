@@ -43,17 +43,25 @@ class KomponenController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'komponen' => 'required',
-            'harga' => 'required',
-            'type_id' => 'required',
-            'brand_id' => 'required',
-            'sparepart_id' => 'required',
-
-
+            'komponen'      => 'required',
+            'harga'         => 'required',
+            'type_id'       => 'required',
+            'brand_id'      => 'required',
+            'sparepart_id'  => 'required',
+            'stock'         => 'required',
+            'image'        => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $input = $request->all();
-        $item = Komponen::create($input);
 
+        // dd($request);
+        $input = $request->all();
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $nama_file = time() . str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('image/komponen', $nama_file);
+            $input['image'] = $nama_file;
+        }
+        $item = Komponen::create($input);
+        // dd($item);
         if($item){
             return redirect()->route('komponen.index')->with('success', 'data was successfully Created');
         }else{
@@ -93,16 +101,29 @@ class KomponenController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request,[
-            'komponen' => 'required',
-            'harga' => 'required',
+            'komponen'      => 'required',
+            'stock'         => 'required',
+            'harga'         => 'required',
+            'image'         => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         // $input = $request->all();
+        $input = $request->all();
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $nama_file = time() . str_replace(" ", "", $file->getClientOriginalName());
+            $file->move('image/komponen', $nama_file);
+            $input['image'] = $nama_file;
+        }else{
+            unset($input['image']);
+        }
+
         $item = Komponen::find($id);
-        $item->komponen = $request->input('komponen');
-        $item->harga = $request->input('harga');
+        // $item = $request->input($input);
+        $item->update($input);
         // dd($item);
-        $item->save();
+
 
     return redirect()->route('komponen.index')
                 ->with('success','sparepart updated successfully');

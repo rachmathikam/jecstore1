@@ -42,14 +42,14 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-          @if(auth()->user()->can('list-pelanggan'))
+          @if(auth()->user()->can('user-view'))
             <a href="{{route('pelanggan.index')}}">
               <i class="bi bi-circle"></i><span>Data Pelanggan</span>
             </a>
           @endif
           </li>
           <li>
-          @if(auth()->user()->can('list-pelanggan'))
+          @if(auth()->user()->can('user-view'))
             <a href="{{route ('teknisi.index')}}">
               <i class="bi bi-circle"></i><span>Data Teknisi</span>
             </a>
@@ -92,23 +92,6 @@
           <span>brand</span>
         </a>
       </li>
-
-
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
-        </a>
-      </li><!-- End Error 404 Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-blank.html">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
-        </a>
-      </li><!-- End Blank Page Nav -->
-
     </ul>
 
   </aside><!-- End Sidebar-->

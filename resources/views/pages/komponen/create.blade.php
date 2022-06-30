@@ -1,5 +1,5 @@
 @extends('../layouts.apps')
-@section('title', 'Dashboard')
+@section('title', 'komponen')
 @section('content')
 
     <main id="main" class="main">
@@ -22,7 +22,7 @@
                             <h5 class="card-title">Tambah Komponen</h5>
 
                             <!-- Multi Columns Form -->
-                            <form class="row g-3" action="{{ route('komponen.store') }}" method="POST">
+                            <form class="row g-3" action="{{ route('komponen.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-md-12">
                                     <label for="inputName5" class="form-label">Komponen</label>
@@ -54,7 +54,7 @@
                                             <option value="{{ $brand->id }}">{{ $brand->brand }}</option>
                                         @endforeach
                                     </select>
-                                    @error('brand_id')
+                                    @error('brand')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -83,6 +83,27 @@
                                         @endforeach
                                     </select>
                                     @error('sparepart_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputEmail5" class="form-label">Gambar</label>
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                        value="{{ old('image') }}" id="image" name="image">
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputName5" class="form-label">Stock</label>
+                                    <input type="number" class="form-control @error('stock') is-invalid @enderror"
+                                        value="{{ old('stock') }}" id="name" name="stock" placeholder="Enter stock"
+                                        autofocus>
+                                    @error('stock')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

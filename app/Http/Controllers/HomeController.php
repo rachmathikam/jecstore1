@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use Hash;
+use Spatie\Permission\Models\Role;
 
 
 class HomeController extends Controller
@@ -27,7 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('/pages/home/index');
+        $user = User::role('pelanggan')->count();
+        // dd($user);
+        return view('/pages/home/index',compact('user' ));
         // $role = Auth::user()->role;
         // if($role == "admin"){
         //     alert()->success('Success','Login Success to Admin Panel!');

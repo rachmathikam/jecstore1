@@ -1,5 +1,5 @@
 @extends('../layouts.apps')
-@section('title', 'Dashboard')
+@section('title', 'Komponen')
 @section('content')
 
 
@@ -28,7 +28,9 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Komponen</th>
+                            <th scope="col">stock</th>
                             <th scope="col">Harga</th>
+                            <th scope="col">Gambar</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -37,7 +39,12 @@
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{ $komponen->komponen }}</td>
+                            <td>{{ $komponen->stock }}</td>
                             <td>{{ $komponen->harga }}</td>
+                            <td>
+                                <img src="{{ asset('image/komponen/' . $komponen->image) }}"
+                                                            width="80px">
+                            </td>
                             <td>
 
                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('komponen.destroy', $komponen->id) }}" method="POST">

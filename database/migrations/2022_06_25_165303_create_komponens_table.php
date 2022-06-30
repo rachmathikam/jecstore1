@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('komponen');
             $table->string('harga');
             $table->integer('stock');
+            $table->string('image');
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')
                         ->references('id')

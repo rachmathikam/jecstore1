@@ -12,6 +12,8 @@ class Komponen extends Model
     protected $fillable = [
         'komponen',
         'harga',
+        'image',
+        'stock',
         'brand_id',
         'type_id',
         'sparepart_id',
