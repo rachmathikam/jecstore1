@@ -27,7 +27,8 @@ class CreateTeknisiSeeder extends Seeder
 
         $role->givePermissionTo([
             'menu-data-list',
-            'list-pelanggan'
+            'list-pelanggan',
+            'home'
         ]);
 
         $user->assignRole([$role->id]);

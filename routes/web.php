@@ -12,6 +12,8 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\SparepatController;
 use App\Http\Controllers\KomponenController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LayananController;
+
 
 
 
@@ -67,11 +69,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('sparepat', SparepatController::class);
     Route::resource('komponen', KomponenController::class);
     Route::resource('contact', ContactController::class);
-
-
-
-
+    Route::resource('layanans', LayananController::class);
 
 });
 Route::view('/','pages.frontend.home');
 Route::view('abouts','pages.frontend.about');
+Route::view('contacts','pages.frontend.contact');
+

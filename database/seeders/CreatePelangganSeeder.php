@@ -20,13 +20,14 @@ class CreatePelangganSeeder extends Seeder
         $user = User::create([
             'name'  => 'hikam',
             'email'     => 'hikam@gmail.com',
-            'password'  => bcrypt('pelanggan12345'),
+            'password'  => bcrypt('hikam123'),
         ]);
 
         $role = Role::where('name', 'pelanggan')->first();
 
         $role->givePermissionTo([
            'user-permission',
+           'pelanggan',
         ]);
 
         $user->assignRole([$role->id]);

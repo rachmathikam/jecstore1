@@ -87,11 +87,19 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route ('layanans.index')}}">
+            <i class="ri-settings-5-fill"></i>
+          <span>Layanan</span>
+        </a>
+      </li>
+      @if(auth()->user()->can('user-view'))
+      <li class="nav-item">
         <a class="nav-link collapsed" href="{{route ('brand.index')}}">
             <i class="bx bxs-customize"></i>
           <span>brand</span>
         </a>
       </li>
+      @endif
     </ul>
 
   </aside><!-- End Sidebar-->

@@ -19,7 +19,6 @@
         <div class="col-lg-12">
           <div class="row">
 
-            @can('home')
             <!-- Sales Card -->
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
@@ -123,42 +122,9 @@
                 </div>
               </div>
 
-            </div>
-            @endcan<!-- End Customers Card -->
-            @can('pelanggan')
-                <h3 class="text-center">Welcome {{ Auth::user()->name }}</h3>
-            @endcan
-            <!-- Reports -->
-            @can('contact-show')
-            <section class="section">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <h5 class="card-title">Data Pelanggan</h5>
-                                    <table class="table datatable" style="width: 100%; white-space: nowrap">
-                                        <thead>
-                                            <tr>
-                                               <th>User</th>
-                                               <th>Komentar</th>
+            </div><!-- End Customers Card -->
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>User</td>
-                                                <td>Komentasasasa</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            @endcan
+
           </div>
         </div><!-- End Left side columns -->
       </div>

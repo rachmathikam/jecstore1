@@ -49,7 +49,7 @@ class ContactController extends Controller
 
         $data = $request->all();
 
-        $contact = Contact::create($data);
+        $contact = Contact::create();
 
         if($contact){
             return redirect()->route('contact.index')->with('Success', 'Contact created successfully.');
@@ -59,7 +59,6 @@ class ContactController extends Controller
         }
 
     }
-
     /**
      * Display the specified resource.
      *

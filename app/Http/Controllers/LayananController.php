@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Brand;
+use App\Models\Type;
+use App\Models\layanan;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +16,8 @@ class LayananController extends Controller
      */
     public function index()
     {
-        //
+        $layanans = Layanan::all();
+        return view('pages.layanans.index',compact('layanans'));
     }
 
     /**
